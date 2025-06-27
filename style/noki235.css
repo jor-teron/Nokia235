@@ -1,0 +1,115 @@
+/* style/nokia235.css */
+
+/* Basic Resets & Body Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nokia Pure Text', sans-serif; /* Or a simple sans-serif like Arial, Helvetica */
+    background-color: #000; /* Dark background, typical for feature phones */
+    color: #fff; /* White text */
+    overflow: hidden; /* Prevent scrolling */
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    box-sizing: border-box; /* Include padding/border in element's total width and height */
+    -webkit-text-size-adjust: 100%; /* Prevent font boosting on some mobile browsers */
+}
+
+/* App Container (simulates the screen) */
+.app-container {
+    flex-grow: 1; /* Takes up available space */
+    display: flex;
+    flex-direction: column;
+    padding: 5px; /* Small padding around the content */
+    align-items: center; /* Center content horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 0.9em; /* Small font size */
+    text-align: center;
+    margin: 5px 0 10px 0; /* Adjust spacing */
+    color: #eee;
+}
+
+/* Grid Container & Table Styling */
+.grid-container {
+    width: 100%; /* Take full width of parent */
+    max-width: 240px; /* Approximate width for a 2.8in screen (240x320 resolution) */
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+}
+
+td {
+    width: 33.33%; /* 3 columns - CRITICAL FOR GRID LAYOUT */
+    height: 50px; /* Fixed height for each tile */
+    padding: 2px; /* Small padding inside tiles */
+    box-sizing: border-box;
+    border: 1px solid transparent; /* Placeholder border for focus */
+    cursor: pointer; /* Indicate interactivity */
+    transition: background-color 0.1s ease, border-color 0.1s ease; /* Smooth transition for focus */
+
+    /* REMOVED: display: flex; flex-direction: column; align-items: center; justify-content: center; from here */
+    /* The TD itself will now behave as a standard table-cell, which is what we want for the grid */
+}
+
+/* NEW: Styling for the content inside each tile */
+.tile-content {
+    display: flex; /* Use flexbox to arrange icon and text vertically and center them */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Make sure it takes up the full space of its parent td */
+    height: 100%; /* Make sure it takes up the full space of its parent td */
+    text-align: center; /* Fallback for text centering if flex is flaky on text */
+}
+
+
+td img {
+    width: 28px; /* Icon size */
+    height: 28px; /* Icon size */
+    margin-bottom: 2px; /* Space between icon and text */
+}
+
+td span {
+    font-size: 0.6em; /* Very small font for app names */
+    display: block; /* Ensure text wraps if needed */
+    line-height: 1em;
+}
+
+/* Focus State */
+td.focused {
+    background-color: #004488; /* Blue highlight */
+    border: 1px solid #0088ff; /* Brighter blue border */
+    color: #fff;
+}
+
+/* Footer Styling */
+#app-footer {
+    width: 100%;
+    padding: 8px 10px;
+    background-color: #111; /* Slightly darker background for footer */
+    color: #ddd;
+    text-align: center;
+    font-size: 0.7em; /* Small font size for footer */
+    border-top: 1px solid #333;
+    box-sizing: border-box;
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+/* Basic responsiveness for slightly larger screens (for testing on desktop) */
+@media (min-width: 320px) {
+    body {
+        max-width: 240px; /* Simulate phone width */
+        margin: 0 auto; /* Center on larger screens */
+        height: 320px; /* Simulate phone height */
+        border: 1px solid #444; /* Visual border for the phone screen */
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+}
