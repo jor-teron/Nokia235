@@ -22,15 +22,8 @@ body {
     flex-direction: column;
     padding: 5px; /* Small padding around the content */
     align-items: center; /* Center content horizontally */
-    justify-content: flex-start; /* Align content to the top */
+    justify-content: center; /* Center content vertically */
     box-sizing: border-box;
-}
-
-h1 {
-    font-size: 0.9em; /* Small font size */
-    text-align: center;
-    margin: 5px 0 10px 0; /* Adjust spacing */
-    color: #eee;
 }
 
 /* Grid Container & Table Styling */
@@ -38,6 +31,7 @@ h1 {
     width: 100%; /* Take full width of parent */
     max-width: 240px; /* Approximate width for a 2.8in screen (240x320 resolution) */
     box-sizing: border-box;
+    overflow: hidden; /* Hide anything outside the 3x3 view */
 }
 
 table {
@@ -47,59 +41,40 @@ table {
 
 td {
     width: 33.33%; /* 3 columns - CRITICAL FOR GRID LAYOUT */
-    height: 50px; /* Fixed height for each tile */
-    padding: 2px; /* Small padding inside tiles */
+    height: 60px; /* Height for the tile */
+    padding: 0; /* REMOVED padding from TD, it's now on .tile-link */
     box-sizing: border-box;
     border: 1px solid transparent; /* Placeholder border for focus */
-    cursor: pointer; /* Indicate interactivity */
+    /* cursor: pointer; No longer needed on TD, cursor will be on the <a> */
     transition: background-color 0.1s ease, border-color 0.1s ease; /* Smooth transition for focus */
-
-    /* REMOVED: display: flex; flex-direction: column; align-items: center; justify-content: center; from here */
-    /* The TD itself will now behave as a standard table-cell, which is what we want for the grid */
 }
 
-/* NEW: Styling for the content inside each tile */
-.tile-content {
-    display: flex; /* Use flexbox to arrange icon and text vertically and center them */
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%; /* Make sure it takes up the full space of its parent td */
-    height: 100%; /* Make sure it takes up the full space of its parent td */
-    text-align: center; /* Fallback for text centering if flex is flaky on text */
+/* NEW: Styling for the anchor link inside each tile */
+.tile-link {
+    display: flex; /* Make the link a flex container */
+    flex-direction: column; /* Arrange content vertically (image) */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    width: 100%; /* Make it fill the entire td */
+    height: 100%; /* Make it fill the entire td */
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color (though no text now) */
+    box-sizing: border-box; /* Include padding/border in size */
+    padding: 2px; /* APPLY padding here instead of td */
+    outline: none; /* Remove default browser focus outline, our .focused class handles it */
+    cursor: pointer; /* Indicate interactivity */
 }
 
-
-td img {
-    width: 28px; /* Icon size */
-    height: 28px; /* Icon size */
-    margin-bottom: 2px; /* Space between icon and text */
+.tile-link img {
+    width: 40px; /* Icon size */
+    height: 40px; /* Icon size */
 }
 
-td span {
-    font-size: 0.6em; /* Very small font for app names */
-    display: block; /* Ensure text wraps if needed */
-    line-height: 1em;
-}
-
-/* Focus State */
+/* Focus State - now applied to TD, which contains the focused <a> */
 td.focused {
     background-color: #004488; /* Blue highlight */
     border: 1px solid #0088ff; /* Brighter blue border */
     color: #fff;
-}
-
-/* Footer Styling */
-#app-footer {
-    width: 100%;
-    padding: 8px 10px;
-    background-color: #111; /* Slightly darker background for footer */
-    color: #ddd;
-    text-align: center;
-    font-size: 0.7em; /* Small font size for footer */
-    border-top: 1px solid #333;
-    box-sizing: border-box;
-    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 /* Basic responsiveness for slightly larger screens (for testing on desktop) */
